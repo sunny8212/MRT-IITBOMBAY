@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Cog, Code, Flask, Presentation } from 'lucide-react';
+import { Cog, Code, Beaker, Presentation } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
@@ -44,7 +44,7 @@ const SubsystemsSection = () => {
     {
       title: "Biosciences",
       description: "Integrating systems for scientific analysis and sample collection on extraterrestrial terrain.",
-      icon: <Flask className="h-6 w-6 text-white" />,
+      icon: <Beaker className="h-6 w-6 text-white" />,
       color: "bg-cosmic/30"
     },
     {

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Cog, Code, Flask, Presentation } from 'lucide-react';
+import { Cog, Code, Beaker, Presentation } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 const SubsystemsPage = () => {
@@ -88,7 +88,7 @@ const SubsystemsPage = () => {
     {
       id: "biosciences",
       title: "Biosciences",
-      icon: <Flask className="h-6 w-6 text-cosmic" />,
+      icon: <Beaker className="h-6 w-6 text-cosmic" />,
       color: "text-cosmic",
       bgColor: "bg-cosmic/20",
       description: "Implementing scientific analysis and experiments",
