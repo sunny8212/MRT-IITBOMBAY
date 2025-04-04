@@ -21,7 +21,7 @@ interface CompetitionProps {
 const Competition = ({ title, location, description, image, results }: CompetitionProps) => (
   <div className="mb-16 bg-space-light/20 rounded-xl overflow-hidden border border-white/10">
     <div className="md:flex">
-      <div className="md:w-1/3">
+      <div className="md:w-1/3 h-64 md:h-auto">
         <img 
           src={image} 
           alt={title} 
@@ -161,28 +161,14 @@ const CompetitionsPage = () => {
             </p>
           </div>
           
-          {/* Timeline */}
-          <div className="mb-20 overflow-x-auto">
-            <div className="flex justify-center min-w-max">
-              <div className="relative flex items-center h-20">
-                {/* Timeline line */}
-                <div className="absolute h-1 bg-gradient-to-r from-mars via-cosmic to-mars w-full"></div>
-                
-                {/* Timeline markers */}
-                {timeline.map((item, index) => (
-                  <div key={index} className="relative mx-8">
-                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full mb-2 whitespace-nowrap">
-                      <div className="bg-mars rounded-full px-3 py-1 text-white text-sm font-medium">
-                        {item.year}
-                      </div>
-                    </div>
-                    <div className="h-3 w-3 rounded-full bg-white relative z-10"></div>
-                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full mt-2 w-32">
-                      <p className="text-white/80 text-sm text-center">{item.event}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+          {/* Timeline - Fixed with uploaded image */}
+          <div className="mb-20 relative">
+            <div className="w-full h-auto overflow-hidden">
+              <img 
+                src="/lovable-uploads/5d7d4563-0109-4a59-9a4f-f234750a1674.png" 
+                alt="MRT Competition Timeline" 
+                className="w-full max-w-4xl mx-auto"
+              />
             </div>
           </div>
           

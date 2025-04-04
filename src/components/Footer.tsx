@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { ChevronUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -33,34 +34,21 @@ const Footer = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10 w-full max-w-4xl">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-10 w-full max-w-4xl">
             <div>
               <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4">About</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#about" className="text-white/70 hover:text-white transition-colors">Our Mission</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white transition-colors">History</a></li>
-                <li><a href="#team" className="text-white/70 hover:text-white transition-colors">Team</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white transition-colors">Sponsors</a></li>
+                <li><a href="/#about" className="text-white/70 hover:text-white transition-colors">Our Mission</a></li>
+                <li><Link to="/team" className="text-white/70 hover:text-white transition-colors">Team</Link></li>
               </ul>
             </div>
             
             <div>
               <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4">Projects</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#projects" className="text-white/70 hover:text-white transition-colors">Rovers</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white transition-colors">Research</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white transition-colors">Competitions</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white transition-colors">Gallery</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4">Resources</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="text-white/70 hover:text-white transition-colors">Blog</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white transition-colors">Publications</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white transition-colors">Downloads</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white transition-colors">Media Kit</a></li>
+                <li><Link to="/rover" className="text-white/70 hover:text-white transition-colors">Rovers</Link></li>
+                <li><Link to="/competitions" className="text-white/70 hover:text-white transition-colors">Competitions</Link></li>
+                <li><Link to="/gallery" className="text-white/70 hover:text-white transition-colors">Gallery</Link></li>
               </ul>
             </div>
             
@@ -68,9 +56,7 @@ const Footer = () => {
               <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4">Connect</h4>
               <ul className="space-y-2 text-sm">
                 <li><a href="#contact" className="text-white/70 hover:text-white transition-colors">Contact Us</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white transition-colors">Join the Team</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white transition-colors">Partner with Us</a></li>
-                <li><a href="#" className="text-white/70 hover:text-white transition-colors">Support Us</a></li>
+                <li><Link to="/updates" className="text-white/70 hover:text-white transition-colors">Updates & Media</Link></li>
               </ul>
             </div>
           </div>
@@ -86,9 +72,6 @@ const Footer = () => {
                 </a>
                 <a href="#" className="text-white/60 hover:text-white text-sm transition-colors">
                   Terms of Service
-                </a>
-                <a href="#" className="text-white/60 hover:text-white text-sm transition-colors">
-                  Sitemap
                 </a>
               </div>
             </div>

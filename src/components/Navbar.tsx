@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
 
@@ -71,9 +70,6 @@ const Navbar = () => {
                 </Link>
               )
             ))}
-            <Button className="bg-gradient-to-r from-mars to-cosmic hover:opacity-90 text-white">
-              Join Us
-            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -112,9 +108,6 @@ const Navbar = () => {
                   </Link>
                 )
               ))}
-              <Button className="bg-gradient-to-r from-mars to-cosmic hover:opacity-90 text-white w-full">
-                Join Us
-              </Button>
             </div>
           </div>
         </div>
