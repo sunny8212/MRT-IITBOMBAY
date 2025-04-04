@@ -1,0 +1,191 @@
+
+import React, { useState } from 'react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import { X } from 'lucide-react';
+
+const GalleryPage = () => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const categories = [
+    { name: "Rovers", id: "rovers" },
+    { name: "Competitions", id: "competitions" },
+    { name: "Team", id: "team" },
+    { name: "Workshops", id: "workshops" },
+    { name: "Events", id: "events" }
+  ];
+
+  const galleryImages = [
+    {
+      src: "https://via.placeholder.com/800x600?text=Rover+1",
+      alt: "Rover in the lab",
+      category: "rovers"
+    },
+    {
+      src: "https://via.placeholder.com/800x600?text=Competition+1",
+      alt: "Team at URC competition",
+      category: "competitions"
+    },
+    {
+      src: "https://via.placeholder.com/800x600?text=Team+Photo+1",
+      alt: "Team photo 2023",
+      category: "team"
+    },
+    {
+      src: "https://via.placeholder.com/800x600?text=Workshop+1",
+      alt: "Robotics workshop",
+      category: "workshops"
+    },
+    {
+      src: "https://via.placeholder.com/800x600?text=Event+1",
+      alt: "Tech exhibition",
+      category: "events"
+    },
+    {
+      src: "https://via.placeholder.com/800x600?text=Rover+2",
+      alt: "Rover testing",
+      category: "rovers"
+    },
+    {
+      src: "https://via.placeholder.com/800x600?text=Competition+2",
+      alt: "ERC competition",
+      category: "competitions"
+    },
+    {
+      src: "https://via.placeholder.com/800x600?text=Team+Photo+2",
+      alt: "Subsystem team",
+      category: "team"
+    },
+    {
+      src: "https://via.placeholder.com/800x600?text=Workshop+2",
+      alt: "Electronics workshop",
+      category: "workshops"
+    },
+    {
+      src: "https://via.placeholder.com/800x600?text=Rover+3",
+      alt: "Rover arm close-up",
+      category: "rovers"
+    },
+    {
+      src: "https://via.placeholder.com/800x600?text=Competition+3",
+      alt: "IRC competition",
+      category: "competitions"
+    },
+    {
+      src: "https://via.placeholder.com/800x600?text=Team+Photo+3",
+      alt: "Team celebration",
+      category: "team"
+    },
+    {
+      src: "https://via.placeholder.com/800x600?text=Event+2",
+      alt: "Award ceremony",
+      category: "events"
+    },
+    {
+      src: "https://via.placeholder.com/800x600?text=Rover+4",
+      alt: "Rover field testing",
+      category: "rovers"
+    },
+    {
+      src: "https://via.placeholder.com/800x600?text=Workshop+3",
+      alt: "Software workshop",
+      category: "workshops"
+    }
+  ];
+
+  const [activeCategory, setActiveCategory] = useState("all");
+  
+  const filteredImages = activeCategory === "all" 
+    ? galleryImages 
+    : galleryImages.filter(img => img.category === activeCategory);
+
+  return (
+    <div className="min-h-screen bg-space">
+      <Navbar />
+      
+      <section className="pt-28 pb-20 bg-space-dark relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute top-1/4 right-0 w-1/3 h-1/3 bg-mars/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 left-0 w-1/3 h-1/3 bg-cosmic/5 rounded-full blur-3xl"></div>
+        
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center mb-16">
+            <h1 className="section-title">Gallery</h1>
+            <p className="section-subtitle">
+              A visual journey through our projects, competitions, and team activities.
+            </p>
+          </div>
+          
+          {/* Filter buttons */}
+          <div className="flex flex-wrap justify-center gap-3 mb-10">
+            <button
+              onClick={() => setActiveCategory("all")}
+              className={`py-2 px-4 rounded-full transition-colors ${
+                activeCategory === "all" 
+                  ? "bg-gradient-to-r from-mars to-cosmic text-white" 
+                  : "bg-space-light/30 text-white/70 hover:text-white"
+              }`}
+            >
+              All
+            </button>
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => setActiveCategory(category.id)}
+                className={`py-2 px-4 rounded-full transition-colors ${
+                  activeCategory === category.id 
+                    ? "bg-gradient-to-r from-mars to-cosmic text-white" 
+                    : "bg-space-light/30 text-white/70 hover:text-white"
+                }`}
+              >
+                {category.name}
+              </button>
+            ))}
+          </div>
+          
+          {/* Gallery grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {filteredImages.map((image, index) => (
+              <div 
+                key={index} 
+                className="overflow-hidden rounded-xl bg-space-light/30 cursor-pointer"
+                onClick={() => setSelectedImage(image.src)}
+              >
+                <img 
+                  src={image.src} 
+                  alt={image.alt} 
+                  className="w-full aspect-square object-cover object-center hover:scale-110 transition-transform duration-300"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      
+      {/* Lightbox */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button 
+            className="absolute top-4 right-4 text-white p-2 rounded-full bg-space-light/30 hover:bg-space-light/50 transition-colors"
+            onClick={() => setSelectedImage(null)}
+          >
+            <X className="h-6 w-6" />
+          </button>
+          <img 
+            src={selectedImage} 
+            alt="Enlarged view" 
+            className="max-w-full max-h-[90vh] object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+      
+      <Footer />
+    </div>
+  );
+};
+
+export default GalleryPage;

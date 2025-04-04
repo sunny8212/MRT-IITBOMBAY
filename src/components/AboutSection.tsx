@@ -1,26 +1,40 @@
 
 import React from 'react';
-import { Rocket, Globe, Star } from 'lucide-react';
+import { Award, Flag, Users, Star, Rocket } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-interface FeatureProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  className?: string;
-}
-
-const Feature = ({ icon, title, description, className }: FeatureProps) => (
-  <div className={cn("bg-space-light/50 rounded-xl p-6 backdrop-blur-sm", className)}>
-    <div className="mb-4 inline-block p-3 bg-gradient-to-br from-mars/20 to-cosmic/20 rounded-lg">
-      {icon}
-    </div>
-    <h3 className="text-xl font-bold mb-2 font-technospace">{title}</h3>
-    <p className="text-white/70">{description}</p>
-  </div>
-);
-
 const AboutSection = () => {
+  const figures = [
+    { 
+      number: "12+", 
+      text: "Years and counting!", 
+      icon: <Star className="h-6 w-6 text-cosmic" />
+    },
+    { 
+      number: "50+", 
+      text: "Active team members", 
+      icon: <Users className="h-6 w-6 text-mars" />
+    },
+    { 
+      number: "6", 
+      text: "Entirely different rovers", 
+      icon: <Rocket className="h-6 w-6 text-cosmic" />
+    },
+    { 
+      number: "∞", 
+      text: "Uncountable learnings!", 
+      icon: <Star className="h-6 w-6 text-mars" />
+    }
+  ];
+
+  const highlights = [
+    "Secured First position among all Indian teams in University Rover Challenge 2023, USA",
+    "Secured 6th rank in Bio-sciences task in University Rover Challenge 2023, USA",
+    "Achieved Excellence Award in Autonomous category in International Rover Challenge 2023",
+    "Secured 5th Position out of 18 teams in International Rover Challenge IRC 2023",
+    "Achieved Excellence Award in Navigation Task in European Rover Challenge 2022"
+  ];
+
   return (
     <section id="about" className="section-padding bg-space-dark relative overflow-hidden">
       {/* Background decorations */}
@@ -29,72 +43,79 @@ const AboutSection = () => {
       
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
-          <h2 className="section-title">Our Mission</h2>
-          <p className="section-subtitle">
-            We are a team of passionate students from IIT Bombay dedicated to building rovers
-            that can explore the harsh Martian terrain and conduct scientific research.
+          <h2 className="section-title">About Us</h2>
+          <p className="section-subtitle max-w-4xl mx-auto">
+            Founded in 2012, MRT (Mars Rover Team) was established with a vision to make 
+            significant strides in space exploration and autonomous robotics. Over the years, 
+            our team has fostered an environment of inclusive growth and continuous learning, 
+            leading to remarkable progress and consistent success in premier international competitions.
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          <Feature 
-            icon={<Rocket className="h-6 w-6 text-mars" />}
-            title="Innovation"
-            description="Pushing the boundaries of rover technology with cutting-edge designs and solutions."
-            className="transform hover:-translate-y-2 transition-transform duration-300"
-          />
-          <Feature 
-            icon={<Globe className="h-6 w-6 text-cosmic" />}
-            title="Collaboration"
-            description="Working with industry experts and researchers to create rovers that meet real mission requirements."
-            className="transform hover:-translate-y-2 transition-transform duration-300 lg:mt-8"
-          />
-          <Feature 
-            icon={<Star className="h-6 w-6 text-mars" />}
-            title="Excellence"
-            description="Consistently achieving high standards in international rover competitions and challenges."
-            className="transform hover:-translate-y-2 transition-transform duration-300"
-          />
+        <div className="grid md:grid-cols-2 gap-10 items-center mb-20">
+          <div>
+            <h3 className="text-3xl font-bold mb-6 font-technospace">Our Vision</h3>
+            <ul className="space-y-3 text-white/80">
+              <li className="flex items-start">
+                <Flag className="h-5 w-5 text-mars mr-3 mt-1 flex-shrink-0" />
+                <span>Establish IIT Bombay as a global leader in space robotics</span>
+              </li>
+              <li className="flex items-start">
+                <Flag className="h-5 w-5 text-mars mr-3 mt-1 flex-shrink-0" />
+                <span>Innovate in Mars Rover technology</span>
+              </li>
+              <li className="flex items-start">
+                <Flag className="h-5 w-5 text-mars mr-3 mt-1 flex-shrink-0" />
+                <span>Nurture sustainable and skilled talent pipeline</span>
+              </li>
+              <li className="flex items-start">
+                <Flag className="h-5 w-5 text-mars mr-3 mt-1 flex-shrink-0" />
+                <span>Contribute to advancements in planetary exploration</span>
+              </li>
+              <li className="flex items-start">
+                <Flag className="h-5 w-5 text-mars mr-3 mt-1 flex-shrink-0" />
+                <span>Build a legacy of engineering excellence and impactful research</span>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-3xl font-bold mb-6 font-technospace">Our Mission</h3>
+            <p className="text-white/80">
+              To design, develop, and innovate cutting-edge extraterrestrial robotic solutions 
+              while fostering a culture of excellence, collaboration, and technical expertise 
+              among students. Through hands-on learning and global competitions, we aim to push 
+              the boundaries of autonomous robotics and inspire the next generation of engineers.
+            </p>
+          </div>
         </div>
         
-        <div className="mt-16 md:mt-24 grid md:grid-cols-2 gap-10 items-center">
-          <div>
-            <h3 className="text-3xl font-bold mb-6 font-technospace">Our Journey</h3>
-            <p className="text-white/80 mb-4">
-              Founded in 2014, the IIT Bombay Mars Rover Team has been at the forefront of 
-              student-led space exploration initiatives in India. We started with a simple goal:
-              to build a functioning Mars rover prototype.
-            </p>
-            <p className="text-white/80 mb-4">
-              Today, we've evolved into a multidisciplinary team that designs, builds, and 
-              tests rovers that can navigate challenging terrains, collect samples, and perform
-              sophisticated scientific experiments.
-            </p>
-            <div className="flex space-x-6 mt-8">
-              <div>
-                <p className="text-3xl font-bold text-mars">25+</p>
-                <p className="text-white/70">Team Members</p>
+        {/* Key figures */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
+          {figures.map((figure, index) => (
+            <div key={index} className="bg-space-light/30 rounded-xl p-6 text-center transform hover:-translate-y-2 transition-transform duration-300">
+              <div className="flex justify-center mb-4">
+                <div className="p-3 bg-gradient-to-br from-mars/20 to-cosmic/20 rounded-full">
+                  {figure.icon}
+                </div>
               </div>
-              <div>
-                <p className="text-3xl font-bold text-cosmic">8+</p>
-                <p className="text-white/70">Competitions</p>
-              </div>
-              <div>
-                <p className="text-3xl font-bold text-mars">5+</p>
-                <p className="text-white/70">Rover Prototypes</p>
-              </div>
+              <h4 className="text-4xl font-bold text-gradient mb-2 font-technospace">{figure.number}</h4>
+              <p className="text-white/70">{figure.text}</p>
             </div>
-          </div>
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-mars/20 to-cosmic/20 rounded-xl blur-xl"></div>
-            <img 
-              src="https://via.placeholder.com/600x400?text=Team+Working" 
-              alt="Team Working on Rover" 
-              className="relative rounded-xl shadow-lg"
-            />
-            {/* Decorative elements */}
-            <div className="absolute -top-5 -left-5 w-20 h-20 border border-mars/30 rounded-lg rotate-12"></div>
-            <div className="absolute -bottom-5 -right-5 w-24 h-24 border border-cosmic/30 rounded-lg -rotate-12"></div>
+          ))}
+        </div>
+        
+        {/* Highlights */}
+        <div className="mb-20">
+          <h2 className="text-3xl font-bold mb-8 text-center font-technospace">When this team thrived globally</h2>
+          <div className="bg-space-light/30 rounded-xl p-8 border border-white/10">
+            <ul className="space-y-5">
+              {highlights.map((highlight, index) => (
+                <li key={index} className="flex items-start">
+                  <Award className="h-6 w-6 text-cosmic mr-4 mt-1 flex-shrink-0" />
+                  <p className="text-white/90">{highlight}</p>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

@@ -22,8 +22,9 @@ const HeroSection = () => {
               <span className="text-gradient">TEAM</span>
             </h1>
             <p className="text-white/80 text-lg md:text-xl mb-8 max-w-2xl mx-auto lg:mx-0">
-              Engineering the future of Mars exploration. We design, build and test 
-              next-generation rovers for interplanetary missions.
+              A unique student-led initiative focused on designing and building advanced rovers 
+              capable of extraterrestrial exploration. Our rovers are equipped for autonomous 
+              traversal, onboard testing, and tackling challenges in space exploration.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
               <Button className="bg-mars hover:bg-mars-dark text-white px-8 py-6 rounded-md w-full sm:w-auto">
