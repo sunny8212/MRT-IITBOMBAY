@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,21 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				mars: {
+					DEFAULT: '#E94E35',
+					dark: '#C73D2B',
+					light: '#F5695A'
+				},
+				space: {
+					DEFAULT: '#1A1F2C',
+					dark: '#131722',
+					light: '#333344'
+				},
+				cosmic: {
+					DEFAULT: '#8B5CF6',
+					dark: '#6D45D0',
+					light: '#A78BFA'
 				}
 			},
 			borderRadius: {
@@ -84,11 +100,29 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
+				'pulse-slow': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.8' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 6s ease-in-out infinite',
+				'pulse-slow': 'pulse-slow 4s ease-in-out infinite'
+			},
+			fontFamily: {
+				'space': ['Space Grotesk', 'sans-serif'],
+				'technospace': ['Orbitron', 'sans-serif']
+			},
+			backgroundImage: {
+				'mars-gradient': 'linear-gradient(90deg, #1A1F2C 0%, #2A2F3C 50%, #1A1F2C 100%)',
+				'hero-pattern': 'radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.15) 0%, rgba(233, 78, 53, 0.05) 50%, rgba(26, 31, 44, 0.05) 100%)'
 			}
 		}
 	},
