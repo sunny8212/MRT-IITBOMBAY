@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Linkedin, Globe } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface TeamMemberProps {
   name: string;
