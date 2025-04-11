@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CompetitionsHeader from '@/components/competitions/CompetitionsHeader';
@@ -8,6 +8,11 @@ import CompetitionsList from '@/components/competitions/CompetitionsList';
 import { timelineData } from '@/components/competitions/CompetitionsData';
 
 const CompetitionsPage = () => {
+  // Ensure the page scrolls to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-space">
       <Navbar />
