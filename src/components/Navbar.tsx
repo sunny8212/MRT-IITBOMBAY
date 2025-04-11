@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +23,17 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    } else if (location.pathname !== '/') {
+      // If not on home page, go to home page and then scroll to contact
+      window.location.href = '/#contact';
+    }
+    setIsMobileMenuOpen(false);
+  };
+
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'Updates & Media', href: '/updates' },
@@ -29,7 +42,7 @@ const Navbar = () => {
     { name: 'Competitive Records', href: '/competitions' },
     { name: 'Know the Team', href: '/team' },
     { name: 'Gallery', href: '/gallery' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Contact', href: '#contact', action: scrollToContact },
   ];
 
   return (
@@ -51,25 +64,39 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-4">
-            {navLinks.map((link) => (
-              link.href.startsWith('#') ? (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-white/80 hover:text-white transition-colors font-medium text-sm whitespace-nowrap"
-                >
-                  {link.name}
-                </a>
-              ) : (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  className="text-white/80 hover:text-white transition-colors font-medium text-sm whitespace-nowrap"
-                >
-                  {link.name}
-                </Link>
-              )
-            ))}
+            {navLinks.map((link) => {
+              if (link.action) {
+                return (
+                  <button
+                    key={link.name}
+                    onClick={link.action}
+                    className="text-white/80 hover:text-white transition-colors font-medium text-sm whitespace-nowrap"
+                  >
+                    {link.name}
+                  </button>
+                );
+              } else if (link.href.startsWith('#')) {
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="text-white/80 hover:text-white transition-colors font-medium text-sm whitespace-nowrap"
+                  >
+                    {link.name}
+                  </a>
+                );
+              } else {
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className="text-white/80 hover:text-white transition-colors font-medium text-sm whitespace-nowrap"
+                  >
+                    {link.name}
+                  </Link>
+                );
+              }
+            })}
           </div>
 
           {/* Mobile Menu Button */}
@@ -87,27 +114,41 @@ const Navbar = () => {
         <div className="md:hidden bg-space-dark border-t border-white/10 py-4">
           <div className="container mx-auto px-4">
             <div className="flex flex-col space-y-4">
-              {navLinks.map((link) => (
-                link.href.startsWith('#') ? (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    className="text-white/80 hover:text-white transition-colors font-medium py-2"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {link.name}
-                  </a>
-                ) : (
-                  <Link
-                    key={link.name}
-                    to={link.href}
-                    className="text-white/80 hover:text-white transition-colors font-medium py-2"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {link.name}
-                  </Link>
-                )
-              ))}
+              {navLinks.map((link) => {
+                if (link.action) {
+                  return (
+                    <button
+                      key={link.name}
+                      onClick={link.action}
+                      className="text-white/80 hover:text-white transition-colors font-medium py-2"
+                    >
+                      {link.name}
+                    </button>
+                  );
+                } else if (link.href.startsWith('#')) {
+                  return (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      className="text-white/80 hover:text-white transition-colors font-medium py-2"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {link.name}
+                    </a>
+                  );
+                } else {
+                  return (
+                    <Link
+                      key={link.name}
+                      to={link.href}
+                      className="text-white/80 hover:text-white transition-colors font-medium py-2"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {link.name}
+                    </Link>
+                  );
+                }
+              })}
             </div>
           </div>
         </div>

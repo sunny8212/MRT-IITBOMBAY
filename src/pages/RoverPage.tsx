@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
+import RoverTimeline from '@/components/rover/RoverTimeline';
 
 interface TimelineItemProps {
   year: string;
@@ -114,6 +115,33 @@ const RoverPage = () => {
       ]
     }
   ];
+  
+  const timelineEvents = [
+    {
+      date: "September 2012",
+      title: "MRT Foundation",
+      description: "The IITB Mars Rover Team was established in 2012, and since then, the team has been excelling and achieving milestones in the field of interplanetary exploration. Over the past eight years, the team has grown from a small group of students to a vibrant organization with several members.",
+      image: "/lovable-uploads/33691edf-a52b-4cda-b3c4-bda5c7ee3051.png"
+    },
+    {
+      date: "May 2015",
+      title: "Arjuna 1.0",
+      description: "Arjuna 1.0 was the first prototype ever created by IITB MRT, completed in May 2015. With its advanced sensors, powerful computing systems and robust mobility, Arjuna 1.0 is capable of traversing through the harsh terrain of Mars with ease.",
+      image: "https://via.placeholder.com/600x400?text=Arjuna+1.0"
+    },
+    {
+      date: "June 2016",
+      title: "Arjuna 1.5",
+      description: "The second Mars rover prototype, Arjuna 1.5, was built in 2016. Arjuna 1.5 had sophisticated mechanical systems and dedicated computing resources. It was equipped with sensors and a powerful AI that can detect things in real-time and evaluate data.",
+      image: "https://via.placeholder.com/600x400?text=Arjuna+1.5"
+    },
+    {
+      date: "April 2017",
+      title: "Arjuna 2.0",
+      description: "Arjuna 2.0, the third version of the Mars rovers created in 2017, is revolutionizing our understanding of the Red Planet. Equipped with autonomous navigation systems and advanced sensors, Arjuna 2.0 is able to explore even further and faster than any previous Mars rover.",
+      image: "https://via.placeholder.com/600x400?text=Arjuna+2.0"
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-space">
@@ -157,11 +185,14 @@ const RoverPage = () => {
               designed specifically for the harsh conditions of Mars.
             </p>
             <Button className="bg-gradient-to-r from-mars to-cosmic hover:opacity-90 text-white px-8 py-6">
-              Join Our Team
+              Join Us for the Journey
             </Button>
           </div>
         </div>
       </section>
+      
+      {/* Adding the new timeline section */}
+      <RoverTimeline events={timelineEvents} />
       
       <Footer />
     </div>

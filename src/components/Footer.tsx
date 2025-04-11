@@ -66,13 +66,18 @@ const Footer = () => {
               <p className="text-white/60 text-sm mb-4 md:mb-0">
                 © {new Date().getFullYear()} IIT Bombay Mars Rover Team. All rights reserved.
               </p>
-              <div className="flex space-x-4">
-                <a href="#" className="text-white/60 hover:text-white text-sm transition-colors">
-                  Privacy Policy
-                </a>
-                <a href="#" className="text-white/60 hover:text-white text-sm transition-colors">
-                  Terms of Service
-                </a>
+              <div className="flex flex-col items-end">
+                <div className="flex space-x-4">
+                  <a href="#" className="text-white/60 hover:text-white text-sm transition-colors">
+                    Privacy Policy
+                  </a>
+                  <a href="#" className="text-white/60 hover:text-white text-sm transition-colors">
+                    Terms of Service
+                  </a>
+                </div>
+                <p className="text-white/60 text-sm mt-2">
+                  Website designed & developed by Sunny from ESHWAY
+                </p>
               </div>
             </div>
           </div>
