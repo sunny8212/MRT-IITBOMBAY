@@ -1,9 +1,17 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { ChevronRight, ChevronLeft, Circle } from 'lucide-react';
-import { ChartContainer } from "@/components/ui/chart";
-import { Separator } from "@/components/ui/separator";
+import { Bookmark, Calendar, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 interface TimelineEvent {
   year: string;
@@ -14,144 +22,120 @@ interface CompetitionsTimelineProps {
   events: TimelineEvent[];
 }
 
-const TimelineEvent = ({ year, event, isActive }: TimelineEvent & { isActive: boolean }) => (
-  <div className={cn(
-    "flex flex-col items-center transition-all duration-300",
-    isActive ? "opacity-100" : "opacity-70 hover:opacity-90"
-  )}>
-    <div className={cn(
-      "rounded-full px-6 py-2 text-white font-bold mb-3 transition-all",
-      isActive ? "bg-mars" : "bg-mars/70"
-    )}>
-      {year}
-    </div>
-    
-    <div className="relative flex items-center justify-center mb-3">
-      <Circle 
-        className={cn(
-          "size-4 fill-cosmic stroke-none",
-          isActive ? "opacity-100" : "opacity-70"
-        )} 
-      />
-    </div>
-    
-    <div className={cn(
-      "text-center transition-all text-sm md:text-base",
-      isActive ? "text-white" : "text-white/80"
-    )}>
-      {event}
-    </div>
-  </div>
-);
-
 const CompetitionsTimeline = ({ events }: CompetitionsTimelineProps) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [visibleEvents, setVisibleEvents] = useState<TimelineEvent[]>([]);
-  const [itemsPerView, setItemsPerView] = useState(4);
-
-  // Handle window resize to adjust visible items
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1280) setItemsPerView(4);
-      else if (window.innerWidth >= 768) setItemsPerView(3);
-      else setItemsPerView(2);
-      
-      updateVisibleEvents(activeIndex);
-    };
-
-    const updateVisibleEvents = (index: number) => {
-      const start = Math.max(0, Math.min(index, events.length - itemsPerView));
-      setVisibleEvents(events.slice(start, start + itemsPerView));
-      setActiveIndex(start);
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [events, activeIndex, itemsPerView]);
-
-  const navigate = (direction: 'prev' | 'next') => {
-    if (direction === 'prev' && activeIndex > 0) {
-      const newIndex = Math.max(0, activeIndex - 1);
-      setActiveIndex(newIndex);
-      setVisibleEvents(events.slice(newIndex, newIndex + itemsPerView));
-    } else if (direction === 'next' && activeIndex < events.length - itemsPerView) {
-      const newIndex = Math.min(events.length - itemsPerView, activeIndex + 1);
-      setActiveIndex(newIndex);
-      setVisibleEvents(events.slice(newIndex, newIndex + itemsPerView));
-    }
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
+  
+  const indexOfLastEvent = currentPage * itemsPerPage;
+  const indexOfFirstEvent = indexOfLastEvent - itemsPerPage;
+  const currentEvents = events.slice(indexOfFirstEvent, indexOfLastEvent);
+  const totalPages = Math.ceil(events.length / itemsPerPage);
+  
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: document.getElementById('timeline-section')?.offsetTop || 0, behavior: 'smooth' });
   };
-
+  
   return (
-    <ChartContainer 
-      config={{}} 
-      className="bg-space-dark/50 rounded-2xl p-8 mb-16 backdrop-blur-sm border border-white/5"
-    >
-      <div className="max-w-6xl mx-auto relative">
-        <div className="flex items-center justify-center mb-6">
-          <h3 className="text-2xl md:text-3xl font-bold text-gradient font-technospace">Competition Timeline</h3>
+    <div id="timeline-section" className="bg-space-dark/70 rounded-2xl border border-white/10 backdrop-blur-sm p-8 mb-16">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex items-center justify-center mb-10">
+          <Calendar className="text-cosmic w-7 h-7 mr-3" />
+          <h3 className="text-2xl md:text-3xl font-bold text-gradient font-technospace">Key Milestones</h3>
         </div>
         
-        <div className="relative">
-          {/* Navigation buttons */}
-          {activeIndex > 0 && (
-            <button
-              onClick={() => navigate('prev')}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-cosmic/80 text-white rounded-full p-2 shadow-lg hover:bg-cosmic transition-colors"
-              aria-label="Previous events"
-            >
-              <ChevronLeft size={24} />
-            </button>
-          )}
-          
-          {activeIndex < events.length - itemsPerView && (
-            <button
-              onClick={() => navigate('next')}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-cosmic/80 text-white rounded-full p-2 shadow-lg hover:bg-cosmic transition-colors"
-              aria-label="Next events"
-            >
-              <ChevronRight size={24} />
-            </button>
-          )}
-          
-          {/* Timeline container */}
-          <div className="relative py-8 px-10">
-            {/* Timeline line */}
-            <div className="absolute top-[3.75rem] left-0 right-0 h-1 bg-gradient-to-r from-mars/30 via-cosmic to-mars/30"></div>
-            
-            {/* Timeline events */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {visibleEvents.map((event, idx) => (
-                <TimelineEvent 
-                  key={`${event.year}-${idx}`}
-                  year={event.year}
-                  event={event.event}
-                  isActive={idx === Math.floor(itemsPerView / 2) - (itemsPerView % 2 === 0 ? 1 : 0)}
-                />
+        {/* Timeline grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+          {currentEvents.map((item, index) => (
+            <TimelineCard key={`${item.year}-${index}`} {...item} index={index} />
+          ))}
+        </div>
+        
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <Pagination className="mt-8">
+            <PaginationContent>
+              {currentPage > 1 && (
+                <PaginationItem>
+                  <PaginationPrevious 
+                    className="bg-cosmic/20 hover:bg-cosmic/40 text-white border-white/10"
+                    onClick={() => handlePageChange(currentPage - 1)} 
+                  />
+                </PaginationItem>
+              )}
+              
+              {Array.from({ length: totalPages }).map((_, i) => (
+                <PaginationItem key={i}>
+                  <PaginationLink
+                    onClick={() => handlePageChange(i + 1)}
+                    isActive={currentPage === i + 1}
+                    className={cn(
+                      "border-white/10",
+                      currentPage === i + 1 
+                        ? "bg-cosmic text-white" 
+                        : "bg-cosmic/20 text-white hover:bg-cosmic/40"
+                    )}
+                  >
+                    {i + 1}
+                  </PaginationLink>
+                </PaginationItem>
               ))}
-            </div>
-          </div>
-          
-          {/* Pagination indicators */}
-          <div className="flex justify-center space-x-2 mt-4">
-            {Array.from({ length: Math.max(1, events.length - itemsPerView + 1) }).map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => {
-                  setActiveIndex(idx);
-                  setVisibleEvents(events.slice(idx, idx + itemsPerView));
-                }}
-                className={cn(
-                  "w-2 h-2 rounded-full transition-all",
-                  idx === activeIndex ? "bg-mars w-4" : "bg-white/30"
-                )}
-                aria-label={`Go to page ${idx + 1}`}
-              />
-            ))}
-          </div>
+              
+              {currentPage < totalPages && (
+                <PaginationItem>
+                  <PaginationNext 
+                    className="bg-cosmic/20 hover:bg-cosmic/40 text-white border-white/10"
+                    onClick={() => handlePageChange(currentPage + 1)} 
+                  />
+                </PaginationItem>
+              )}
+            </PaginationContent>
+          </Pagination>
+        )}
+        
+        {/* View all button */}
+        <div className="flex justify-center mt-6">
+          <Button 
+            variant="outline" 
+            className="group border-cosmic/50 text-cosmic hover:bg-cosmic/10"
+            onClick={() => handlePageChange(1)}
+          >
+            View Timeline <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={16} />
+          </Button>
         </div>
       </div>
-    </ChartContainer>
+    </div>
+  );
+};
+
+const TimelineCard = ({ year, event, index }: TimelineEvent & { index: number }) => {
+  const colors = [
+    "from-mars to-cosmic",
+    "from-cosmic to-blue-500",
+    "from-blue-500 to-green-400",
+    "from-green-400 to-mars"
+  ];
+  
+  const gradientClass = colors[index % colors.length];
+  
+  return (
+    <Card className="bg-space-dark/80 border border-white/10 overflow-hidden transition-all hover:-translate-y-1 hover:shadow-lg duration-300">
+      <div className={`h-2 bg-gradient-to-r ${gradientClass}`}></div>
+      <CardContent className="p-0">
+        <div className="p-5">
+          <div className="flex justify-between items-start mb-3">
+            <div className="px-3 py-1 rounded-full bg-cosmic/20 text-white text-sm flex items-center">
+              <Bookmark className="mr-1.5 h-3.5 w-3.5 text-cosmic" />
+              {year}
+            </div>
+            <CheckCircle2 className="h-5 w-5 text-mars/80" />
+          </div>
+          <div className="text-white">
+            {event}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 
