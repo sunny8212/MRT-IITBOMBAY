@@ -8,6 +8,7 @@ const GalleryPage = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const categories = [
+    { name: "All", id: "all" },
     { name: "Rovers", id: "rovers" },
     { name: "Competitions", id: "competitions" },
     { name: "Team", id: "team" },
@@ -118,16 +119,6 @@ const GalleryPage = () => {
           
           {/* Filter buttons */}
           <div className="flex flex-wrap justify-center gap-3 mb-10">
-            <button
-              onClick={() => setActiveCategory("all")}
-              className={`py-2 px-4 rounded-full transition-colors ${
-                activeCategory === "all" 
-                  ? "bg-gradient-to-r from-mars to-cosmic text-white" 
-                  : "bg-space-light/30 text-white/70 hover:text-white"
-              }`}
-            >
-              All
-            </button>
             {categories.map((category) => (
               <button
                 key={category.id}
@@ -135,7 +126,7 @@ const GalleryPage = () => {
                 className={`py-2 px-4 rounded-full transition-colors ${
                   activeCategory === category.id 
                     ? "bg-gradient-to-r from-mars to-cosmic text-white" 
-                    : "bg-space-light/30 text-white/70 hover:text-white"
+                    : "bg-space-light/30 text-white/70 hover:text-white hover:bg-space-light/50"
                 }`}
               >
                 {category.name}
@@ -144,7 +135,7 @@ const GalleryPage = () => {
           </div>
           
           {/* Gallery grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {filteredImages.map((image, index) => (
               <div 
                 key={index} 
@@ -159,6 +150,12 @@ const GalleryPage = () => {
               </div>
             ))}
           </div>
+          
+          {filteredImages.length === 0 && (
+            <div className="text-center py-20">
+              <p className="text-white/70 text-lg">No images found in this category.</p>
+            </div>
+          )}
         </div>
       </section>
       

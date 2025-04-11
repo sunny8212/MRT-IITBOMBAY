@@ -2,13 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,16 +23,38 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Scroll to the top when route changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   const scrollToContact = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    } else if (location.pathname !== '/') {
-      // If not on home page, go to home page and then scroll to contact
-      window.location.href = '/#contact';
+    if (location.pathname === '/') {
+      // If already on home page, scroll to contact section
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If not on home page, navigate to home page with contact hash
+      navigate('/', { state: { scrollToContact: true } });
     }
     setIsMobileMenuOpen(false);
   };
+
+  // Check for scrollToContact state when component mounts
+  useEffect(() => {
+    if (location.state?.scrollToContact) {
+      setTimeout(() => {
+        const contactSection = document.getElementById('contact');
+        if (contactSection) {
+          contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        // Clear the state
+        window.history.replaceState({}, document.title);
+      }, 100); // Small delay to ensure the DOM is ready
+    }
+  }, [location.state]);
 
   const navLinks = [
     { name: 'Home', href: '/' },
@@ -42,7 +64,7 @@ const Navbar = () => {
     { name: 'Competitive Records', href: '/competitions' },
     { name: 'Know the Team', href: '/team' },
     { name: 'Gallery', href: '/gallery' },
-    { name: 'Contact', href: '#contact', action: scrollToContact },
+    { name: 'Contact', href: '#', action: scrollToContact },
   ];
 
   return (

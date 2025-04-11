@@ -12,16 +12,38 @@ interface TimelineItemProps {
 
 const TimelineItem = ({ date, title, description, image, align = 'right' }: TimelineItemProps) => {
   return (
-    <div className="relative pb-20">
+    <div className="relative pb-12 md:pb-20">
       {/* Timeline line */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-mars to-cosmic"></div>
+      <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-mars to-cosmic"></div>
       
       {/* Date marker */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-space-dark border-2 border-mars z-10"></div>
+      <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-space-dark border-2 border-mars z-10"></div>
       
-      {/* Content container */}
+      {/* Content container - Mobile first, stacked layout */}
+      <div className="md:hidden mb-8">
+        <div className="bg-space-dark/40 p-6 rounded-xl border border-white/10">
+          <div className="bg-mars text-white text-lg font-medium py-1 px-4 rounded-full inline-block mb-4">
+            {date}
+          </div>
+          <h3 className="text-2xl font-bold mb-3 font-technospace">{title}</h3>
+          <p className="text-white/80 mb-4">{description}</p>
+          
+          {image && (
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-mars/20 to-cosmic/20 rounded-xl blur-lg"></div>
+              <img 
+                src={image} 
+                alt={title} 
+                className="relative rounded-xl w-full h-auto max-h-60 object-cover"
+              />
+            </div>
+          )}
+        </div>
+      </div>
+      
+      {/* Desktop layout with alternating sides */}
       <div className={cn(
-        "flex items-start gap-8",
+        "hidden md:flex items-start gap-8",
         align === 'left' ? 'flex-row' : 'flex-row-reverse'
       )}>
         {/* Empty space for alignment */}
@@ -65,8 +87,8 @@ interface RoverTimelineProps {
 
 const RoverTimeline = ({ events }: RoverTimelineProps) => {
   return (
-    <div className="max-w-6xl mx-auto px-4 py-20">
-      <div className="text-center mb-16">
+    <div className="max-w-6xl mx-auto px-4 py-12 md:py-20">
+      <div className="text-center mb-8 md:mb-16">
         <h2 className="section-title">The story of how we got started</h2>
         <p className="section-subtitle">
           MRT was started by 5 students with the same mission.<br />
@@ -74,7 +96,7 @@ const RoverTimeline = ({ events }: RoverTimelineProps) => {
         </p>
       </div>
       
-      <div className="relative mt-20">
+      <div className="relative mt-10 md:mt-20">
         {events.map((event, index) => (
           <TimelineItem 
             key={index}
