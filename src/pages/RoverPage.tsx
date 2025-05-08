@@ -10,11 +10,10 @@ interface TimelineItemProps {
   title: string;
   description: string;
   image: string;
-  achievements: string[];
   isRight?: boolean;
 }
 
-const TimelineItem = ({ year, title, description, image, achievements, isRight = false }: TimelineItemProps) => (
+const TimelineItem = ({ year, title, description, image,  isRight = false }: TimelineItemProps) => (
   <div className={`flex flex-col ${isRight ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8 mb-16`}>
     <div className="md:w-1/2">
       <div className="relative">
@@ -32,16 +31,6 @@ const TimelineItem = ({ year, title, description, image, achievements, isRight =
       </div>
       <h2 className="text-3xl font-bold mb-4 font-technospace">{title}</h2>
       <p className="text-white/80 mb-6">{description}</p>
-      
-      <h3 className="text-xl font-semibold mb-3 font-technospace">Key Achievements:</h3>
-      <ul className="space-y-2 mb-6">
-        {achievements.map((achievement, index) => (
-          <li key={index} className="flex items-start">
-            <span className="h-5 w-5 rounded-full bg-cosmic/30 flex-shrink-0 mr-3 mt-1"></span>
-            <span className="text-white/80">{achievement}</span>
-          </li>
-        ))}
-      </ul>
     </div>
   </div>
 );
@@ -49,20 +38,20 @@ const TimelineItem = ({ year, title, description, image, achievements, isRight =
 const RoverPage = () => {
   const rovers = [
     {
-      year: "2018",
-      title: "Rover Alpha",
-      description: "Our first prototype rover designed to establish core mobility and basic operation systems. This marked the beginning of our journey into rover development.",
+      year: "2015",
+      title: "Akrula 1.0",
+      description: " Akrula 1.0 was the first-ever prototype developed by the IITB Mars Rover Team, launched in 2015. Equipped with advanced sensors, powerful computing systems, and robust mobility features, Akrula 1.0 was designed to navigate the harsh terrains of Mars with ease.",
       image: "https://via.placeholder.com/600x400?text=Rover+Alpha",
       achievements: [
-        "Established the foundation of our rover design architecture",
-        "Developed basic drive systems and control mechanisms",
-        "First participation in a national-level competition"
+        "Enhanced suspension system for improved terrain handling",
+        "Implemented first-generation robotic arm with 3 degrees of freedom",
+        "Ranked in top 10 at IRC 2019"
       ]
     },
     {
-      year: "2019",
-      title: "Rover Beta",
-      description: "Building on our experience, Rover Beta featured improved mobility and our first attempt at a robotic arm system for basic manipulation tasks.",
+      year: "2016",
+      title: "Agathsya 1.0",
+      description: "Agathsya 1.0, the second Mars rover prototype by the IITB Mars Rover Team, was built in 2016. It features advanced navigational systems, data-gathering cameras, and a powerful AI capable of real-time object detection and data analysis.",
       image: "https://via.placeholder.com/600x400?text=Rover+Beta",
       achievements: [
         "Enhanced suspension system for improved terrain handling",
@@ -71,9 +60,9 @@ const RoverPage = () => {
       ]
     },
     {
-      year: "2020",
-      title: "Rover Gamma",
-      description: "Gamma represented a significant advancement in our design philosophy, with a focus on robust electronics and initial autonomous capabilities.",
+      year: "2017",
+      title: "Agathsya 2.0",
+      description: "Agathsya 2.0, the third Mars rover prototype developed in 2017, pushed the boundaries of exploration on the Red Planet. With advanced camera and sensor technology, it could explore farther and faster than its predecessors.",
       image: "https://via.placeholder.com/600x400?text=Rover+Gamma",
       achievements: [
         "Developed custom PCBs for improved system integration",
@@ -82,9 +71,9 @@ const RoverPage = () => {
       ]
     },
     {
-      year: "2021",
-      title: "Rover Delta",
-      description: "Delta featured a complete redesign with advanced suspension systems and significant improvements in autonomy and manipulation capabilities.",
+      year: "2018",
+      title: "Hemant 1.0",
+      description: "Hemant 1.0, the fourth Mars rover prototype built in 2018, combined cutting-edge AI with an innovative design, enabling it to navigate even the harshest Martian terrain",
       image: "https://via.placeholder.com/600x400?text=Rover+Delta",
       achievements: [
         "Designed and implemented a rocker-bogie suspension system",
@@ -93,9 +82,9 @@ const RoverPage = () => {
       ]
     },
     {
-      year: "2022",
-      title: "Rover Epsilon",
-      description: "Epsilon pushed our technological boundaries with integrated science packages and advanced autonomous navigation using AI algorithms.",
+      year: "2019-20",
+      title: "Agruni 1.0",
+      description: "Agruni 1.0, the fifth Mars rover prototype developed by the IITB Mars Rover Team, also proudly represented India at the University Rover Challenge.",
       image: "https://via.placeholder.com/600x400?text=Rover+Epsilon",
       achievements: [
         "Integrated soil analysis and life detection capabilities",
@@ -104,14 +93,36 @@ const RoverPage = () => {
       ]
     },
     {
-      year: "2023",
-      title: "Rover Zeta",
-      description: "Our most advanced rover to date, Zeta combines years of learning with cutting-edge technology to create a truly capable extraterrestrial explorer.",
+      year: "2020-21",
+      title: "Yash",
+      description: "Yash is equipped with LiDAR and autonomous mapping capabilities, enabling it to navigate complex obstacle courses by autonomously following directional arrows.",
       image: "https://via.placeholder.com/600x400?text=Rover+Zeta",
       achievements: [
         "Advanced autonomous navigation with SLAM and path planning",
         "High-precision sample collection and analysis system",
         "Secured top Indian team position at URC 2023"
+      ]
+    },
+    {
+      year: "2022-23",
+      title: "Tezant",
+      description: "Tezant, the eighth Mars rover prototype developed in 2022-23, features a new 6-DOF robotic arm with full 360° base rotation for enhanced versatility.",
+      image: "https://via.placeholder.com/600x400?text=Rover+Epsilon",
+      achievements: [
+        "Integrated soil analysis and life detection capabilities",
+        "Implemented neural network-based terrain classification",
+        "Secured Excellence Award at ERC 2022 in Navigation Task"
+      ]
+    },
+     {
+      year: "2024",
+      title: "Amaran",
+      description: "Amaran is the ninth-generation Mars rover prototype developed by the IITB Mars Rover Team in 2024. Featuring a modular design with rugged all-terrain mobility, it combines precise robotic manipulation with advanced vision-based navigation for autonomous operation in challenging environments. Built with a focus on reliability, flexibility, and performance, Amaran continues the team’s legacy of innovation in planetary exploration robotics.",
+      image: "https://via.placeholder.com/600x400?text=Rover+Epsilon",
+      achievements: [
+        "Integrated soil analysis and life detection capabilities",
+        "Implemented neural network-based terrain classification",
+        "Secured Excellence Award at ERC 2022 in Navigation Task"
       ]
     }
   ];

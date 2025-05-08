@@ -7,33 +7,43 @@ import { Link } from 'react-router-dom';
 const RoversSection = () => {
   const rovers = [
     {
-      name: "Rover Alpha",
-      year: "2018",
+      name: "Akrula 1.0",
+      year: "2015",
       image: "https://via.placeholder.com/600x400?text=Rover+Alpha"
     },
     {
-      name: "Rover Beta",
-      year: "2019",
+      name: "Agathsya 1.0",
+      year: "2016",
       image: "https://via.placeholder.com/600x400?text=Rover+Beta"
     },
     {
-      name: "Rover Gamma",
-      year: "2020",
+      name: "Agathsya 2.0",
+      year: "2017",
       image: "https://via.placeholder.com/600x400?text=Rover+Gamma"
     },
     {
-      name: "Rover Delta",
-      year: "2021",
+      name: "Hemant 1.0",
+      year: "2018",
       image: "https://via.placeholder.com/600x400?text=Rover+Delta"
     },
     {
-      name: "Rover Epsilon",
-      year: "2022",
+      name: "Agruni 1.0",
+      year: "2019-20",
       image: "https://via.placeholder.com/600x400?text=Rover+Epsilon"
     },
     {
-      name: "Rover Zeta",
-      year: "2023",
+      name: "Yash",
+      year: "2020-21",
+      image: "https://via.placeholder.com/600x400?text=Rover+Zeta"
+    },
+    {
+      name: "Tezant",
+      year: "2022-23",
+      image: "https://via.placeholder.com/600x400?text=Rover+Zeta"
+    }, 
+    {
+      name: "Amaran",
+      year: "2024",
       image: "https://via.placeholder.com/600x400?text=Rover+Zeta"
     }
   ];
@@ -46,7 +56,7 @@ const RoversSection = () => {
       
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center mb-16">
-          <h2 className="section-title">Our Rovers Through The Years</h2>
+          <h2 className="section-title"> Our Rovers Through The Years</h2>
           <p className="section-subtitle">
             Each rover represents a milestone in our journey, incorporating innovations and lessons from previous designs.
           </p>
